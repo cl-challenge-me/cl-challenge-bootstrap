@@ -14,7 +14,13 @@ variable "location" {
 }
 
 variable "parent_folder" {
-  default = "folders/593280390575"
+  default     = "folders/593280390575"
+  description = "Root folder for environmental folders"
+}
+
+variable "github_user_org" {
+  default     = "pavelrn/cl-challenge-me"
+  description = "Github orhanization"
 }
 
 variable "env_list" {
