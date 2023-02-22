@@ -18,8 +18,8 @@ variable "parent_folder" {
   description = "Root folder for environmental folders"
 }
 
-variable "github_user_org" {
-  default     = "pavelrn/cl-challenge-me"
+variable "github_org" {
+  default     = "cl-challenge-me"
   description = "Github orhanization"
 }
 
@@ -28,3 +28,8 @@ variable "env_list" {
   description = "Environments list"
 }
 
+variable "billing_account" {
+  description = "Billing account ID"
+  type        = string
+  default = "011168-59E2C9-06B012"
+}
