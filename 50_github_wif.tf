@@ -1,10 +1,16 @@
 locals {
-  sa_mapping = {
-    for e in var.env_list : "provisioner-sa-${e}" => {
+  sa_mapping = merge({
+    for e in var.env_list : "provisioner-sa-${e}-app-nginx-hello" => {
       sa_name   = "projects/${var.provisioner_project_id}/serviceAccounts/${google_service_account.provisioner_sa["${e}"].email}"
       attribute = "attribute.repository/${var.github_org}/cl-challenge-app-nginx-hello"
     }
-  }
+  },
+  {
+    for e in var.env_list : "provisioner-sa-${e}-infra" => {
+      sa_name   = "projects/${var.provisioner_project_id}/serviceAccounts/${google_service_account.provisioner_sa["${e}"].email}"
+      attribute = "attribute.repository/${var.github_org}/cl-challenge-infra"
+    }
+  })
 }
 
 module "gh_oidc" {
