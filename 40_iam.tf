@@ -24,7 +24,24 @@ data "google_iam_policy" "access" {
   for_each = toset(var.env_list)
   binding {
     role = "roles/editor"
-
+    members = [
+      "serviceAccount:${google_service_account.provisioner_sa[each.key].email}",
+    ]
+  }
+  binding {
+    role = "roles/resourcemanager.projectIamAdmin"
+    members = [
+      "serviceAccount:${google_service_account.provisioner_sa[each.key].email}",
+    ]
+  }
+  binding {
+    role = "roles/resourcemanager.projectCreator"
+    members = [
+      "serviceAccount:${google_service_account.provisioner_sa[each.key].email}",
+    ]
+  }
+  binding {
+    role = "roles/resourcemanager.projectDeleter"
     members = [
       "serviceAccount:${google_service_account.provisioner_sa[each.key].email}",
     ]
